@@ -1,18 +1,215 @@
 ---
-title: "R Notebook"
+title: "PCA on predictors"
 output: html_notebook
 ---
 
-This is an [R Markdown](http://rmarkdown.rstudio.com) Notebook. When you execute code within the notebook, the results appear beneath the code. 
+The following R-Notebook will be used to do a PCA on the predictors. In order to avoid over-fitting it is my hope to use the fewest predictors possible, or perhaps use the PC's rather than the predictors in the dataframe.My hope is to use the predictors that load the highest onto the PCs. 
 
-Try executing this chunk by clicking the *Run* button within the chunk or by placing your cursor inside it and pressing *Ctrl+Shift+Enter*. 
-
-```{r}
-plot(cars)
+```{r bringing in data}
+df <- read.csv("V-Dem_Frasier_data_1970.csv")
 ```
 
-Add a new chunk by clicking the *Insert Chunk* button on the toolbar or by pressing *Ctrl+Alt+I*.
 
-When you save the notebook, an HTML file containing the code and output will be saved alongside it (click the *Preview* button or press *Ctrl+Shift+K* to preview the HTML file).
+Many of the variables in the dataframe will not make sense for a PCA because they are either Ordinal, Nominal, or based on aggregating other variables. It will be more useful to look at the PC's formed by more fine grained quantitative measures
 
-The preview shows you a rendered HTML copy of the contents of the editor. Consequently, unlike *Knit*, *Preview* does not run any R code chunks. Instead, the output of the chunk when it was last run in the editor is displayed.
+
+
+
+```{r}
+colnames(df)
+```
+
+
+
+
+
+```{r dropping variables that aren't needed}
+df = subset(df, select = -c(Unnamed..0, Entity,X,Year,Countries,Economic.Freedom.Summary.Index,Rank,Quartile,data,data.1,data.2,data.3,data.4,data.5,data.6,data.7,data.8,data.9,data.10))
+```
+
+Some variables are extremely sparse and a categorical one remains so they will be removed
+
+
+
+```{r dropping more variables that aren't needed}
+df = subset(df, select = -c(lib_dich_row_owid,Top.marginal.income.tax.rate,Top.marginal.income.and.payroll.tax.rate,Top.marginal.tax.rate,Protection.of.property.rights,Military.interference.in.rule.of.law.and.politics,Regulatory.restrictions.on.the.sale.of.real.property,Reliability.of.police,Standard.deviation.of.tariff.rates,Non.tariff.trade.barriers,Compliance.costs.of.importing.and.exporting,Regulatory.trade.barriers,Freedom.of.foreigners.to.visit,Hiring.regulations.and.minimum.wage,Hiring.and.firing.regulations,Mandated.cost.of.worker.dismissal,Administrative.requirements,Regulatory.Burden,Starting.a.business,Licensing.restrictions,Tax.compliance,Business.regulations))
+```
+
+
+```{r ISO code}
+df = subset(df, select = -c(ISO_Code))
+```
+
+
+
+In order to deal with missing values I will use the missMDA library which has been shown by previous research to be a good way of dealing with missing values in order to carry out a PCA. 
+https://link.springer.com/article/10.1007/s11258-014-0406-z
+
+
+
+The following version of the missMDA library may or may not be neccessary
+
+```{r}
+
+#pacif (!require("devtools")) install.packages("devtools")
+library('devtools')
+install_github("husson/missMDA")
+
+
+```
+
+
+
+```{r estimating optimal number of dimensions for imputation}
+library('missMDA')
+estim_ncpPCA(df, scale=T)
+
+
+```
+
+
+
+
+```{r }
+
+
+imputePCA(df,ncp=5)
+
+
+```
+
+
+
+Upon review of the above error message, and the data it would seem to be mean tarrif rate that was throwing it off as it only had one 0 amongst a bunch of missing values. The imputePCA algorithm can't work with that.
+
+
+
+```{r removing variable with all missing values besides one 0}
+
+df = subset(df, select = -c(Mean.tariff.rate))
+
+```
+
+
+
+
+
+```{r }
+library('missMDA')
+
+df_impute<-imputePCA(df,ncp=5)
+test<-PCA(df_impute$completeObs)
+
+```
+
+
+
+
+```{r}
+df_fittedX <- data.frame(df_impute$fittedX)
+df_completeObs <- data.frame(df_impute$completeObs)
+
+```
+
+
+
+The fittedX data is the data reconstructed with all values replaced by imputed values that take into account the underlying structure of the data. Whereas the completeObs retains the original values that weren't missing and fills in the missing values with predicted values. In summary, one is entirely synethetic data generated with the underlying structure of the data taken into account, the other is a mix of original data and synthetic data.
+
+
+```{r}
+library(missMDA)
+library(FactoMineR)
+pca_analysis<-PCA(df_impute$completeObs)
+
+```
+
+
+
+```{r}
+variable_coordinates<-data.frame(pca_analysis$var$coord)
+```
+
+
+
+```{r}
+
+loadings<-sweep(pca_analysis$var$coord,2,sqrt(pca_analysis$eig[1:5,1]),FUN="/")
+
+```
+
+
+
+
+
+
+```{r}
+pca_analysis$eig
+```
+
+
+```{r}
+library('factoextra')
+fviz_screeplot(pca_analysis, choice = c("eigenvalue"), ncp=10)
+fviz_screeplot(pca_analysis, ncp=10)
+```
+
+
+
+We are thus able to make some pretty good conclusions about these predictors from a PCA stand-point. There is one massive overall component that a good number of predictors in the data-frame load onto strongly. This first component seems to separate countries higher on some measure of "capitalist liberal democracy" from countries lower on such a measure. This component although explaining 40% of the variance may have the draw-back that it doesn't disentangle some more distinct aspects of a country (e.g., political, social, fiscal, monetary). Although we have 5 components with Eigenvalues greater than 1, the scree-plot seems to suggest that the "elbow" is at 2, and thus even 2 or 3 components is pushing it. 
+
+Another good way to decide should the third, fourth and fifth components be retained is reviewing the variables that load onto them the highest and asking if those components are interpretable? 
+
+My interpretation of all 5 components:
+
+1) a "general" component separating capitalist liberal democracies from other kinds of regimes.
+
+2) Related to the size and power of government especially from an economic standpoint 
+
+3) Harder to interpret. The most positively correlated variables seem to concern monetary policy/currency but the most negatively correlated variables concern conscription and labor market regulations, and the absolute value of the negative and positive correlations is similar.
+
+4) Hard to interpret and seems like nothing but noise.
+
+5) Difficult to interpret. As can be seen below Financial openness and money growth are positively correlated with one another but one is positively and the other negatively correlated with this component.
+
+
+
+```{r}
+cor(df_completeObs$Financial.Openness,df_completeObs$Money.growth)
+```
+
+
+Based on this analysis, 2 PC's best describe the data. The only step that could be taken to improve this is remove some variables from the data-frame that may be adding noise. This would require a thorough review of the Frasier Institutes code-book to see what all these variables represent. And variables that had many missing cases to start with could be removed.Another option is remove the V-Dem data since it concerns many countries missing from the Frasier inst data. It could be worth while to see what the components are of the Frasier data exclusively. 
+
+
+With that being said, the advantage of choosing predictors from various PC's is one can avoid excessive intercorrelation between the predictors. As can be seen below many of these predictors are highly inter-correlated, and this kind of data-set will indeed tend to form a positive manifold.
+
+
+
+
+```{r}
+cor(df_completeObs$indiv_libs_vdem_owid,df_completeObs$electdem_vdem_owid)
+```
+
+
+It will be well worth it to visualize the correlation matrix to see what is highly inter-correlated and what variables are more orthogonal to one another.
+It will be best to look at a selection of variables that load the highest onto component 1 and component 2.
+
+
+
+```{r}
+
+library(corrplot)
+cor_matrix_c1<-cor(data.frame(df_completeObs$Ownership.of.banks,df_completeObs$libdem_vdem_owid,df_completeObs$Freedom.to.trade.Internationally,df_completeObs$Judicial.independence,df_completeObs$indiv_libs_vdem_owid,df_completeObs$Regulation,df_completeObs$electdem_vdem_owid,df_completeObs$Tariffs,df_completeObs$Legal.enforcement.of.contracts))
+cor_matrix_c2<-cor(data.frame(df_completeObs$Government.consumption,df_completeObs$Size.of.Government,df_completeObs$Centralized.collective.bargaining
+,df_completeObs$Hours.Regulations,df_completeObs$Private.sector.credit,df_completeObs$Government.investment))
+corrplot(cor_matrix_c1, method="color",type="upper",tl.pos='n')
+corrplot(cor_matrix_c2, method="color",type="upper",tl.pos='n')
+
+```
+
+
+Among the variables that load strongly onto the first PC there is definitely a high degree of multicolinearity. This is to be expected. For the variables that load strongly onto the second PC there is not as much of a problem with multicolinearity. Knowing which variables are not overly intercorrelated with one another can inform selection of predictors for the model. Given the fact that there are few countries (relatively speaking) and thus few data-points 4 predictors will usually be considered optimal in this situation to avoid over-fitting. 
+
+
+
+
