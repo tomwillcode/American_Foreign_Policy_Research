@@ -93,6 +93,12 @@ df = subset(df, select = -c(Mean.tariff.rate))
 
 
 
+```{r}
+estim_ncpPCA(df, scale=T)
+```
+
+
+
 
 ```{r }
 library('missMDA')
@@ -211,5 +217,34 @@ corrplot(cor_matrix_c2, method="color",type="upper",tl.pos='n')
 Among the variables that load strongly onto the first PC there is definitely a high degree of multicolinearity. This is to be expected. For the variables that load strongly onto the second PC there is not as much of a problem with multicolinearity. Knowing which variables are not overly intercorrelated with one another can inform selection of predictors for the model. Given the fact that there are few countries (relatively speaking) and thus few data-points 4 predictors will usually be considered optimal in this situation to avoid over-fitting. 
 
 
+
+I want to see if the impute PCA is done without the V-dem variables does it work out the same way?
+
+```{r}
+
+df = subset(df, select = -c(indiv_libs_vdem_owid,electdem_vdem_owid,libdem_vdem_owid))
+
+```
+
+
+
+
+
+```{r}
+df_impute<-imputePCA(df,ncp=5)
+df_fittedX <- data.frame(df_impute$fittedX)
+df_completeObs <- data.frame(df_impute$completeObs)
+pca_analysis<-PCA(df_impute$completeObs)
+variable_coordinates<-data.frame(pca_analysis$var$coord)
+loadings<-sweep(pca_analysis$var$coord,2,sqrt(pca_analysis$eig[1:5,1]),FUN="/")
+```
+
+
+```{r}
+fviz_screeplot(pca_analysis, choice = c("eigenvalue"), ncp=10)
+fviz_screeplot(pca_analysis, ncp=10)
+```
+
+With just the Frasier variables we get the exact same result from a PCA standpoint. There might be more of a case for more than 2 factors in such a case. But the main 2 PC's are the exact same with ownership of banks being the highest loading variable on PC1, and all the size of government stuff being on PC2
 
 

@@ -1,0 +1,439 @@
+---
+title: "R Notebook"
+output:
+  html_document:
+    df_print: paged
+  pdf_document: default
+---
+
+
+
+```{r}
+library("dplyr")
+```
+The following analysis will see what aspects of a countries politics/economy in 1970 predict the US creating a meaningful alliance with that country after WWII, and lasting until 1970. The only alliances that will be considered here are as follows: defense OR nonaggression OR entente (the binary alliance variable takes on a 1 in the event of any one of these, or a 0 otherwise). The neutrality treaties seem to be much weaker agreements that don't last long. The data sources can be seen in the repository.
+
+
+
+```{r}
+main_df <- read.csv("Frasier_Vdem_regime&alliance.csv")
+```
+
+
+First I will remove the variables that won't be needed. Crucially, only some variables will be desirable for the impute PCA that will create synethetic data to enhance the predictors by filling in missing values. I will keep the economic freedom summary index from the Frasier institute.
+
+```{r}
+main_df = subset(main_df, select = -c(X,Unnamed..0_x,Unnamed..0_x.1,Unnamed..0.1,Year,Rank,Quartile,data,data.1,data.2,data.3,data.4,data.5,data.6,data.7,data.8,data.9,data.10))
+
+```
+
+Some variables I will remove, mainly on account of how sparse they are
+
+```{r}
+main_df = subset(main_df, select = -c(lib_dich_row_owid,Top.marginal.income.tax.rate,Top.marginal.income.and.payroll.tax.rate,Top.marginal.tax.rate,Protection.of.property.rights,Military.interference.in.rule.of.law.and.politics,Regulatory.restrictions.on.the.sale.of.real.property,Reliability.of.police,Standard.deviation.of.tariff.rates,Non.tariff.trade.barriers,Compliance.costs.of.importing.and.exporting,Regulatory.trade.barriers,Freedom.of.foreigners.to.visit,Hiring.regulations.and.minimum.wage,Hiring.and.firing.regulations,Mandated.cost.of.worker.dismissal,Administrative.requirements,Regulatory.Burden,Starting.a.business,Licensing.restrictions,Tax.compliance,Business.regulations,ISO_Code,Mean.tariff.rate))
+
+
+```
+
+Other variables that won't be neccessary should be removed.
+
+
+
+```{r}
+main_df = subset(main_df, select = -c(Unnamed..0_y.1,Unnamed..0_y,country,democracy,monarchy))
+
+```
+
+Both the dependent variable and the categorical predictor variable need to be stored as factor variables in R.
+```{r}
+main_df$alliance<-as.factor(main_df$alliance)
+main_df$regimenarrowcat<-as.factor(main_df$regimenarrowcat)
+```
+
+
+
+It would be advantageous to create a regime categorization variable that is more parsimonious. In the next chunk I will do that. The categorizations will all be based on the Codebook for Political Regimes of the World Dataset, v. 2.0. which can be found in this repository. 
+
+```{r}
+
+main_df<-main_df %>% mutate(Regime_type = recode(regimenarrowcat, 
+  "0" = "Democracy",
+  "1" = "Democracy",
+  "2" = "Democracy",
+  "3" = "Monarchy",
+  "8" = "Monarchy",
+  "9"= "Monarchy",
+  "4"= "Single-party rule",
+  "5"="Multi-party authoritarian rule",
+  "6"="Personalist rule",
+  "7"="Military rule",
+  "10" ="Other oligarchy",
+  "99" = "unknown"))
+
+main_df$Regime_type[is.na(main_df$Regime_type)] <- "unknown"
+
+#main_df %>% dplyr::mutate(Regime_type = replace_na(Regime_type, "unknown"))
+
+
+```
+
+
+
+
+
+Now the data can be randomly partitioned into training and test data. The data set is relatively small so a 85% vs. 15% split will be used.
+
+#still need to edit the below
+```{r}
+
+
+#make this example reproducible
+set.seed(1)
+
+#create ID column
+main_df$id <- 1:nrow(main_df)
+
+#use 85% of dataset as training set and 15% as test set 
+train <- main_df %>% dplyr::sample_frac(0.85)
+test  <- dplyr::anti_join(main_df, train, by = 'id')
+
+```
+
+
+Now impute PCA can be used on the continuous variables
+
+
+```{r}
+train_countries = subset(train, select = c(Entity,Countries))
+test_countries = subset(test, select = c(Entity,Countries))
+train = subset(train, select = -c(Entity,Countries))
+test = subset(test, select = -c(Entity,Countries))
+
+```
+
+
+
+Next imputePCA will be used to fill in missing values in both dataframes separately to prevent leakage. A previous analysis indicated that ncp=5 was optimal for the imputation.
+
+
+
+```{r}
+
+library('missMDA')
+
+train_impute<-imputePCA(train[c(1:37)],ncp=5)
+
+train[c(1:37)] <- data.frame(train_impute$completeObs)
+
+
+
+```
+
+
+
+
+```{r}
+
+test_impute<-imputePCA(test[c(1:37)],ncp=5)
+
+test[c(1:37)] <- data.frame(test_impute$completeObs)
+
+```
+
+
+
+Now a classification tree model will be created with rpart to predict whether or not a country is an ally using, the regime that country is classified as, the level of private ownership of banks in that country, and the level of government consumption in that country. Those variables will be chosen because PCA revealed that ownership of banks loads the highest onto the main principle component that describes the data, and government consumption loads the highest onto the second most important principle component for describing variation in the data. 
+
+
+
+
+```{r}
+library("rpart")
+library("rpart.plot")
+smart_tree <- rpart(alliance~Regime_type+Ownership.of.banks+Government.consumption,data = train, method ="class")
+rpart.plot(smart_tree)
+prp(smart_tree)
+```
+
+
+
+The above tree shows clear evidence of over-fitting. The tree is classifying countries with ownership of banks higher than 1.9 as allies, except for those with ownership of banks between 5.4 and 9.6. This is very unlikely to be anything other than noise, so the max depth of the tree will be lowered to 3.
+
+
+
+```{r}
+
+smart_tree <- rpart(alliance~Regime_type+Ownership.of.banks+Government.consumption,data = train, method ="class",control = list(maxdepth = 3))
+rpart.plot(smart_tree)
+prp(smart_tree)
+
+```
+
+
+
+The above tree is easy to interpret. If a regime falls into single-party rule, multi-party authoritarian rule, personalist rule, Monarchy, other oligarchy, or is "unknown." the US is not inclined to make an alliance with them unless government consumption is greater than 7.9. Since government consumption is reverse coded that corresponds to lower government consumption. These results indicate that the "unknown" category isn't randomly distributed but is biased towards regimes that are not democracies. Most of the "unknown" countries were colonies of various Western European powers at the time. More domain expertise will be required to classify them.
+
+For countries considered Democracies, or "military rule", provided ownership of banks is higher than 1.9 then the US is predicted to make an alliance with them. 
+
+Next, models can be created that simply use the political variables or the economic variables for comparison sake.
+
+
+
+```{r}
+poli_tree <- rpart(alliance~Regime_type,data = train, method ="class")
+rpart.plot(poli_tree)
+prp(poli_tree)
+
+
+```
+
+
+
+
+```{r}
+econ_tree <- rpart(alliance~Ownership.of.banks+Government.consumption,data = train, method ="class",control = list(maxdepth = 3))
+rpart.plot(econ_tree)
+prp(econ_tree)
+
+```
+
+
+
+With the tree depth of 3 the results are consistent with over-fitting so it should be reduced to 2
+
+
+```{r}
+econ_tree <- rpart(alliance~Ownership.of.banks+Government.consumption,data = train, method ="class",control = list(maxdepth = 2))
+rpart.plot(econ_tree)
+prp(econ_tree)
+
+
+```
+
+
+The performance of all three models can be tested on the training and test data. First we can see a summary of the smart_tree
+
+
+
+
+```{r}
+summary(smart_tree)
+```
+
+
+
+
+A good overview of performance on the training data can be obtained using the Caret library
+
+
+
+
+
+```{r}
+library('caret')
+smart_tree_predictions = predict(smart_tree, data = train, type = "class")
+confusionMatrix(table(train$alliance, smart_tree_predictions))
+#table(train$alliance, smart_tree_predictions)
+
+econ_tree_predictions = predict(econ_tree, data = train,type = "class")
+confusionMatrix(table(train$alliance, econ_tree_predictions))
+
+#table(train$alliance, econ_tree_predictions)
+
+poli_tree_predictions = predict(poli_tree, data = train, type = "class")
+confusionMatrix(table(train$alliance, poli_tree_predictions))
+
+#table(train$alliance, poli_tree_predictions)
+
+```
+
+
+It can be seen that the "smart tree" as one might expect, performs the best. Interestingly, the political tree performs better than the economic tree. This is no doubt related to the fact that "Regime type" has by far the highest "Variable importance" of any predictor in the smart-tree. I will predict that the smart-tree will still show exceptional performance and the best performance on the test-data.
+
+
+
+
+
+```{r}
+
+smart_tree_predictions = predict(smart_tree, newdata = test, type = "class")
+
+confusionMatrix(table(test$alliance, smart_tree_predictions))
+
+econ_tree_predictions = predict(econ_tree, newdata = test,type = "class")
+
+confusionMatrix(table(test$alliance, econ_tree_predictions))
+
+poli_tree_predictions = predict(poli_tree, newdata = test, type = "class")
+
+confusionMatrix(table(test$alliance, poli_tree_predictions))
+
+```
+
+
+The "econ-tree" fails on the test data, indicating that the US does not seem to be choosing its allies from a purely economic standpoint, and the political considerations factor in heavily. Indeed the "poli-tree" performs slightly better on the test-data than the smart tree (based on Kappa). However their performance is comparable, and the smart tree has a desirable feature: given that the US actually makes an alliance with a country, the smart tree is better at successfully predicting this. The smart tree has a lower rate of type 2 errors. And although the rate of type 1 errors is higher, it is not terribly high. This actually holds true on the training data and the test data which suggests it is not noise. America up until 1970 selected its allies based on a mixture of political and economic criteria. It is of course a stochastic process, but there are also measurable deterministic criteria used to choose allies. 
+
+
+Another line of enquiry is comparing the Economic Freedom Summary Index from the Frasier Institute with the liberal democracy index from Vdem. These are variables where one would reasonably only expect a monotonic relationship between them and the US decision to make an alliance with a country. Binary logistic regression can be used to evaluate the correlations and see which is a stronger predictor of whether or not the US forges an alliance with a country.  
+
+
+
+
+```{r}
+full_model<-glm(alliance~libdem_vdem_owid+Economic.Freedom.Summary.Index,
+                family=binomial,data=train) 
+
+lib_model<-glm(alliance~libdem_vdem_owid,
+                family=binomial,data=train) 
+
+cap_model<-glm(alliance~Economic.Freedom.Summary.Index,
+                family=binomial,data=train) 
+
+```
+
+
+
+
+```{r}
+summary(full_model)
+```
+
+
+
+
+
+
+
+
+```{r}
+library(lmtest)
+
+### Comparing the crude model (logit1) to the adjusted model (logit2)
+lrtest(lib_model, cap_model)
+```
+
+
+It can be seen that the Economic Freedom Summary Index from the Frasier Institute is a stronger predictor of whether or not the US aligns with a given country, compared to the liberal democracy index. With both variables in the model the liberal democracy index isn't statistically significant.
+
+Both models can be used for prediction as well. 
+
+
+```{r}
+
+probabilities <- cap_model %>% predict(train, type = "response")
+capitalist_model <- ifelse(probabilities > 0.5, 1, 0)
+table(train$alliance, capitalist_model)
+
+probabilities <- lib_model %>% predict(train, type = "response")
+liberal_model <- ifelse(probabilities > 0.5, 1, 0)
+table(train$alliance, liberal_model)
+
+
+
+```
+
+
+Intriguingly the liberal model has slightly better performance on the training data. It would be worthwhile to look at the summary for both models. 
+
+
+```{r}
+
+summary(lib_model)
+
+summary(cap_model)
+
+
+```
+
+
+
+Interestingly both models are significant but the capitalist model has a lower AIC hence the multivariate model does not consider liberal democracy to add any predictive capability above and beyond economic freedom.
+
+it can be seen that the correlation between these variables is strong
+
+```{r}
+cor(train$libdem_vdem_owid,train$Economic.Freedom.Summary.Index)
+```
+
+
+
+Evaluating both models on the test data now
+
+```{r}
+
+probabilities <- cap_model %>% predict(test, type = "response")
+capitalist_model <- ifelse(probabilities > 0.5, 1, 0)
+table(test$alliance, capitalist_model)
+
+probabilities <- lib_model %>% predict(test, type = "response")
+liberal_model <- ifelse(probabilities > 0.5, 1, 0)
+table(test$alliance, liberal_model)
+
+```
+
+
+
+
+Curiously the liberal model has better performance on the test data as well. The capitalist model obviously performs very poorly on the test data, and the liberal model shows fair performance. However the overall results that came back from the binary logistic regression are indicative of noise. It is unclear why the liberal model would have a higher AIC.
+
+All of the above analyses converge on the idea that qualitative political considerations are more important than the capitalist dimension for predicting what regimes the US will make an alliance with. However, the capitalist dimension is obviously important as demonstrated by the smart tree. Every single model has higher type II errors than the smart tree for detecting regimes that the US has indeed forged an alliance with. This holds true on the training and test data.
+
+The political tree basically just predicts that it's a US ally if and only if it's classified as a democracy. This is obviously not the case. The smart-tree realizes that for non-democracies, the US policy is to make an alliance with them if they are sufficiently capitalist in terms of their economic landscape. Interestingly the smart tree is less conservative from a data science standpoint and mirrors the real-life take of less conservative thinkers. The political tree is more conservative from a data science standpoint (fewer type 1 errors) and it mirrors the take of western conservative thinkers who have long assumed that the US is mostly concerned with promoting liberal democracy.   
+
+
+It will be useful to see some descriptive visuals for this data.
+
+
+```{r}
+library(ggplot2)
+g <- ggplot(main_df, aes(Regime_type, fill=Regime_type))+ geom_bar() 
+g+ theme(axis.text.x = element_text(angle = 45, hjust = 1))
+```
+
+
+
+```{r}
+
+library(ggplot2)
+g <- ggplot(main_df %>% filter(alliance == 1), aes(Regime_type, fill=Regime_type))+geom_bar() 
+g+ theme(axis.text.x = element_text(angle = 45, hjust = 1))
+
+```
+
+
+It can be seen that the distribution of regime types for US allies is quite different from the distribution for all countries at that time. The US is heavily biased towards aligning with democracies, and curiously, the US isn't so averse to regimes under Military rule.
+
+Similarly we can see what proportion of Democracies were US allies, and what proportion of countries under Military rule were US allies.
+
+First looking at Democracies
+
+
+```{r}
+
+g <- ggplot(main_df %>% filter(Regime_type == "Democracy"), aes(alliance, fill=alliance))+geom_bar() 
+g
+
+```
+
+
+
+Next looking at regimes under Military Rule
+```{r}
+
+g <- ggplot(main_df %>% filter(Regime_type == "Military rule"), aes(alliance, fill=alliance))+geom_bar() 
+g
+
+```
+
+
+
+It can be seen that the majority of democracies were US allies. Although the majority of regimes under Military rule were not US allies, a sizable minority of them were.
+
+There are of course other variables to consider that don't usually enter into the discussion. Such as cultural background. The US had a clear preference at this time for making alliances with countries in Latin America, the Caribean, and Western Europe, indicating that a shared cultural background (e.g., Western Christianity) is likely very important. Nonetheless the US notably forged alliances with countries from drastically different cultural backgrounds (some of which continue to this day) and there are many western/democratic nations that didn't or have not forged an alliance with the US.
+The US primarily leans towards aligning with democracies. However, provided those democracies are not capitalist enough the US will not align with them, and provided authoritarian regimes are sufficiently capitalist, the US will align with them. That is the logic of the smart tree, and although it is just a model of a complex stochastic process, it seems to have validity.
+
+The next step will be to test this model on data from after 1980 and see if it's still a fit. In that case it may be worthwhile to normalize the variables so that the predictors are seen through a "relative" lens.
+
+
+
+

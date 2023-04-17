@@ -1,0 +1,1123 @@
+% Options for packages loaded elsewhere
+\PassOptionsToPackage{unicode}{hyperref}
+\PassOptionsToPackage{hyphens}{url}
+%
+\documentclass[
+]{article}
+\usepackage{amsmath,amssymb}
+\usepackage{lmodern}
+\usepackage{iftex}
+\ifPDFTeX
+  \usepackage[T1]{fontenc}
+  \usepackage[utf8]{inputenc}
+  \usepackage{textcomp} % provide euro and other symbols
+\else % if luatex or xetex
+  \usepackage{unicode-math}
+  \defaultfontfeatures{Scale=MatchLowercase}
+  \defaultfontfeatures[\rmfamily]{Ligatures=TeX,Scale=1}
+\fi
+% Use upquote if available, for straight quotes in verbatim environments
+\IfFileExists{upquote.sty}{\usepackage{upquote}}{}
+\IfFileExists{microtype.sty}{% use microtype if available
+  \usepackage[]{microtype}
+  \UseMicrotypeSet[protrusion]{basicmath} % disable protrusion for tt fonts
+}{}
+\makeatletter
+\@ifundefined{KOMAClassName}{% if non-KOMA class
+  \IfFileExists{parskip.sty}{%
+    \usepackage{parskip}
+  }{% else
+    \setlength{\parindent}{0pt}
+    \setlength{\parskip}{6pt plus 2pt minus 1pt}}
+}{% if KOMA class
+  \KOMAoptions{parskip=half}}
+\makeatother
+\usepackage{xcolor}
+\usepackage[margin=1in]{geometry}
+\usepackage{color}
+\usepackage{fancyvrb}
+\newcommand{\VerbBar}{|}
+\newcommand{\VERB}{\Verb[commandchars=\\\{\}]}
+\DefineVerbatimEnvironment{Highlighting}{Verbatim}{commandchars=\\\{\}}
+% Add ',fontsize=\small' for more characters per line
+\usepackage{framed}
+\definecolor{shadecolor}{RGB}{248,248,248}
+\newenvironment{Shaded}{\begin{snugshade}}{\end{snugshade}}
+\newcommand{\AlertTok}[1]{\textcolor[rgb]{0.94,0.16,0.16}{#1}}
+\newcommand{\AnnotationTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\newcommand{\AttributeTok}[1]{\textcolor[rgb]{0.77,0.63,0.00}{#1}}
+\newcommand{\BaseNTok}[1]{\textcolor[rgb]{0.00,0.00,0.81}{#1}}
+\newcommand{\BuiltInTok}[1]{#1}
+\newcommand{\CharTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
+\newcommand{\CommentTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textit{#1}}}
+\newcommand{\CommentVarTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\newcommand{\ConstantTok}[1]{\textcolor[rgb]{0.00,0.00,0.00}{#1}}
+\newcommand{\ControlFlowTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{\textbf{#1}}}
+\newcommand{\DataTypeTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{#1}}
+\newcommand{\DecValTok}[1]{\textcolor[rgb]{0.00,0.00,0.81}{#1}}
+\newcommand{\DocumentationTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\newcommand{\ErrorTok}[1]{\textcolor[rgb]{0.64,0.00,0.00}{\textbf{#1}}}
+\newcommand{\ExtensionTok}[1]{#1}
+\newcommand{\FloatTok}[1]{\textcolor[rgb]{0.00,0.00,0.81}{#1}}
+\newcommand{\FunctionTok}[1]{\textcolor[rgb]{0.00,0.00,0.00}{#1}}
+\newcommand{\ImportTok}[1]{#1}
+\newcommand{\InformationTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\newcommand{\KeywordTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{\textbf{#1}}}
+\newcommand{\NormalTok}[1]{#1}
+\newcommand{\OperatorTok}[1]{\textcolor[rgb]{0.81,0.36,0.00}{\textbf{#1}}}
+\newcommand{\OtherTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{#1}}
+\newcommand{\PreprocessorTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textit{#1}}}
+\newcommand{\RegionMarkerTok}[1]{#1}
+\newcommand{\SpecialCharTok}[1]{\textcolor[rgb]{0.00,0.00,0.00}{#1}}
+\newcommand{\SpecialStringTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
+\newcommand{\StringTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
+\newcommand{\VariableTok}[1]{\textcolor[rgb]{0.00,0.00,0.00}{#1}}
+\newcommand{\VerbatimStringTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
+\newcommand{\WarningTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\usepackage{graphicx}
+\makeatletter
+\def\maxwidth{\ifdim\Gin@nat@width>\linewidth\linewidth\else\Gin@nat@width\fi}
+\def\maxheight{\ifdim\Gin@nat@height>\textheight\textheight\else\Gin@nat@height\fi}
+\makeatother
+% Scale images if necessary, so that they will not overflow the page
+% margins by default, and it is still possible to overwrite the defaults
+% using explicit options in \includegraphics[width, height, ...]{}
+\setkeys{Gin}{width=\maxwidth,height=\maxheight,keepaspectratio}
+% Set default figure placement to htbp
+\makeatletter
+\def\fps@figure{htbp}
+\makeatother
+\setlength{\emergencystretch}{3em} % prevent overfull lines
+\providecommand{\tightlist}{%
+  \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
+\setcounter{secnumdepth}{-\maxdimen} % remove section numbering
+\ifLuaTeX
+  \usepackage{selnolig}  % disable illegal ligatures
+\fi
+\IfFileExists{bookmark.sty}{\usepackage{bookmark}}{\usepackage{hyperref}}
+\IfFileExists{xurl.sty}{\usepackage{xurl}}{} % add URL line breaks if available
+\urlstyle{same} % disable monospaced font for URLs
+\hypersetup{
+  pdftitle={R Notebook},
+  hidelinks,
+  pdfcreator={LaTeX via pandoc}}
+
+\title{R Notebook}
+\author{}
+\date{\vspace{-2.5em}}
+
+\begin{document}
+\maketitle
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{library}\NormalTok{(}\StringTok{"dplyr"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## 
+## Attaching package: 'dplyr'
+\end{verbatim}
+
+\begin{verbatim}
+## The following objects are masked from 'package:stats':
+## 
+##     filter, lag
+\end{verbatim}
+
+\begin{verbatim}
+## The following objects are masked from 'package:base':
+## 
+##     intersect, setdiff, setequal, union
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{main\_df }\OtherTok{\textless{}{-}} \FunctionTok{read.csv}\NormalTok{(}\StringTok{"Frasier\_Vdem\_regime\&alliance.csv"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+First I will remove the variables that won't be needed. Crucially, only
+some variables will be desirable for the impute PCA that will create
+synethetic data to enhance the predictors by filling in missing values.
+I will keep the economic freedom summary index from the Frasier
+institute.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{main\_df }\OtherTok{=} \FunctionTok{subset}\NormalTok{(main\_df, }\AttributeTok{select =} \SpecialCharTok{{-}}\FunctionTok{c}\NormalTok{(X,Unnamed..0\_x,Unnamed..0\_x}\FloatTok{.1}\NormalTok{,Unnamed..}\FloatTok{0.1}\NormalTok{,Year,Rank,Quartile,data,data}\FloatTok{.1}\NormalTok{,data}\FloatTok{.2}\NormalTok{,data}\FloatTok{.3}\NormalTok{,data}\FloatTok{.4}\NormalTok{,data}\FloatTok{.5}\NormalTok{,data}\FloatTok{.6}\NormalTok{,data}\FloatTok{.7}\NormalTok{,data}\FloatTok{.8}\NormalTok{,data}\FloatTok{.9}\NormalTok{,data}\FloatTok{.10}\NormalTok{))}
+\end{Highlighting}
+\end{Shaded}
+
+Some variables I will remove, mainly on account of how sparse they are
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{main\_df }\OtherTok{=} \FunctionTok{subset}\NormalTok{(main\_df, }\AttributeTok{select =} \SpecialCharTok{{-}}\FunctionTok{c}\NormalTok{(lib\_dich\_row\_owid,Top.marginal.income.tax.rate,Top.marginal.income.and.payroll.tax.rate,Top.marginal.tax.rate,Protection.of.property.rights,Military.interference.in.rule.of.law.and.politics,Regulatory.restrictions.on.the.sale.of.real.property,Reliability.of.police,Standard.deviation.of.tariff.rates,Non.tariff.trade.barriers,Compliance.costs.of.importing.and.exporting,Regulatory.trade.barriers,Freedom.of.foreigners.to.visit,Hiring.regulations.and.minimum.wage,Hiring.and.firing.regulations,Mandated.cost.of.worker.dismissal,Administrative.requirements,Regulatory.Burden,Starting.a.business,Licensing.restrictions,Tax.compliance,Business.regulations,ISO\_Code,Mean.tariff.rate))}
+\end{Highlighting}
+\end{Shaded}
+
+Other variables that won't be neccessary should be removed.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{main\_df }\OtherTok{=} \FunctionTok{subset}\NormalTok{(main\_df, }\AttributeTok{select =} \SpecialCharTok{{-}}\FunctionTok{c}\NormalTok{(Unnamed..0\_y}\FloatTok{.1}\NormalTok{,Unnamed..0\_y,country,democracy,monarchy))}
+\end{Highlighting}
+\end{Shaded}
+
+Both the dependent variable and the categorical predictor variable need
+to be stored as factor variables in R.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{main\_df}\SpecialCharTok{$}\NormalTok{alliance}\OtherTok{\textless{}{-}}\FunctionTok{as.factor}\NormalTok{(main\_df}\SpecialCharTok{$}\NormalTok{alliance)}
+\NormalTok{main\_df}\SpecialCharTok{$}\NormalTok{regimenarrowcat}\OtherTok{\textless{}{-}}\FunctionTok{as.factor}\NormalTok{(main\_df}\SpecialCharTok{$}\NormalTok{regimenarrowcat)}
+\end{Highlighting}
+\end{Shaded}
+
+It would be advantageous to create a regime categorization variable that
+is more parsimonious. In the next chunk I will do that. The
+categorizations will all be based on the Codebook for Political Regimes
+of the World Dataset, v. 2.0. which can be found in this repository.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{main\_df}\OtherTok{\textless{}{-}}\NormalTok{main\_df }\SpecialCharTok{\%\textgreater{}\%} \FunctionTok{mutate}\NormalTok{(}\AttributeTok{Regime\_type =} \FunctionTok{recode}\NormalTok{(regimenarrowcat, }
+  \StringTok{"0"} \OtherTok{=} \StringTok{"Democracy"}\NormalTok{,}
+  \StringTok{"1"} \OtherTok{=} \StringTok{"Democracy"}\NormalTok{,}
+  \StringTok{"2"} \OtherTok{=} \StringTok{"Democracy"}\NormalTok{,}
+  \StringTok{"3"} \OtherTok{=} \StringTok{"Monarchy"}\NormalTok{,}
+  \StringTok{"8"} \OtherTok{=} \StringTok{"Monarchy"}\NormalTok{,}
+  \StringTok{"9"}\OtherTok{=} \StringTok{"Monarchy"}\NormalTok{,}
+  \StringTok{"4"}\OtherTok{=} \StringTok{"Single{-}party rule"}\NormalTok{,}
+  \StringTok{"5"}\OtherTok{=}\StringTok{"Multi{-}party authoritarian rule"}\NormalTok{,}
+  \StringTok{"6"}\OtherTok{=}\StringTok{"Personalist rule"}\NormalTok{,}
+  \StringTok{"7"}\OtherTok{=}\StringTok{"Military rule"}\NormalTok{,}
+  \StringTok{"10"} \OtherTok{=}\StringTok{"Other oligarchy"}\NormalTok{,}
+  \StringTok{"99"} \OtherTok{=} \StringTok{"unknown"}\NormalTok{))}
+
+\NormalTok{main\_df}\SpecialCharTok{$}\NormalTok{Regime\_type[}\FunctionTok{is.na}\NormalTok{(main\_df}\SpecialCharTok{$}\NormalTok{Regime\_type)] }\OtherTok{\textless{}{-}} \StringTok{"unknown"}
+
+\CommentTok{\#main\_df \%\textgreater{}\% dplyr::mutate(Regime\_type = replace\_na(Regime\_type, "unknown"))}
+\end{Highlighting}
+\end{Shaded}
+
+Now the data can be randomly partitioned into training and test data.
+The data set is relatively small so a 85\% vs.~15\% split will be used.
+
+\#still need to edit the below
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\#make this example reproducible}
+\FunctionTok{set.seed}\NormalTok{(}\DecValTok{1}\NormalTok{)}
+
+\CommentTok{\#create ID column}
+\NormalTok{main\_df}\SpecialCharTok{$}\NormalTok{id }\OtherTok{\textless{}{-}} \DecValTok{1}\SpecialCharTok{:}\FunctionTok{nrow}\NormalTok{(main\_df)}
+
+\CommentTok{\#use 85\% of dataset as training set and 15\% as test set }
+\NormalTok{train }\OtherTok{\textless{}{-}}\NormalTok{ main\_df }\SpecialCharTok{\%\textgreater{}\%}\NormalTok{ dplyr}\SpecialCharTok{::}\FunctionTok{sample\_frac}\NormalTok{(}\FloatTok{0.85}\NormalTok{)}
+\NormalTok{test  }\OtherTok{\textless{}{-}}\NormalTok{ dplyr}\SpecialCharTok{::}\FunctionTok{anti\_join}\NormalTok{(main\_df, train, }\AttributeTok{by =} \StringTok{\textquotesingle{}id\textquotesingle{}}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+Now impute PCA can be used on the continuous variables
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{train\_countries }\OtherTok{=} \FunctionTok{subset}\NormalTok{(train, }\AttributeTok{select =} \FunctionTok{c}\NormalTok{(Entity,Countries))}
+\NormalTok{test\_countries }\OtherTok{=} \FunctionTok{subset}\NormalTok{(test, }\AttributeTok{select =} \FunctionTok{c}\NormalTok{(Entity,Countries))}
+\NormalTok{train }\OtherTok{=} \FunctionTok{subset}\NormalTok{(train, }\AttributeTok{select =} \SpecialCharTok{{-}}\FunctionTok{c}\NormalTok{(Entity,Countries))}
+\NormalTok{test }\OtherTok{=} \FunctionTok{subset}\NormalTok{(test, }\AttributeTok{select =} \SpecialCharTok{{-}}\FunctionTok{c}\NormalTok{(Entity,Countries))}
+\end{Highlighting}
+\end{Shaded}
+
+Next imputePCA will be used to fill in missing values in both dataframes
+separately to prevent leakage. A previous analysis indicated that ncp=5
+was optimal for the imputation.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{library}\NormalTok{(}\StringTok{\textquotesingle{}missMDA\textquotesingle{}}\NormalTok{)}
+
+\NormalTok{train\_impute}\OtherTok{\textless{}{-}}\FunctionTok{imputePCA}\NormalTok{(train[}\FunctionTok{c}\NormalTok{(}\DecValTok{1}\SpecialCharTok{:}\DecValTok{37}\NormalTok{)],}\AttributeTok{ncp=}\DecValTok{5}\NormalTok{)}
+
+\NormalTok{train[}\FunctionTok{c}\NormalTok{(}\DecValTok{1}\SpecialCharTok{:}\DecValTok{37}\NormalTok{)] }\OtherTok{\textless{}{-}} \FunctionTok{data.frame}\NormalTok{(train\_impute}\SpecialCharTok{$}\NormalTok{completeObs)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{test\_impute}\OtherTok{\textless{}{-}}\FunctionTok{imputePCA}\NormalTok{(test[}\FunctionTok{c}\NormalTok{(}\DecValTok{1}\SpecialCharTok{:}\DecValTok{37}\NormalTok{)],}\AttributeTok{ncp=}\DecValTok{5}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## Warning in impute(X, ncp = ncp, scale = scale, method = method, ind.sup =
+## ind.sup, : Stopped after 1000 iterations
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{test[}\FunctionTok{c}\NormalTok{(}\DecValTok{1}\SpecialCharTok{:}\DecValTok{37}\NormalTok{)] }\OtherTok{\textless{}{-}} \FunctionTok{data.frame}\NormalTok{(test\_impute}\SpecialCharTok{$}\NormalTok{completeObs)}
+\end{Highlighting}
+\end{Shaded}
+
+Now a classification tree model will be created with rpart to predict
+whether or not a country is an ally using, the regime that country is
+classified as, the level of private ownership of banks in that country,
+and the level of government consumption in that country. Those variables
+will be chosen because PCA revealed that ownership of banks loads the
+highest onto the main principle component that describes the data, and
+government consumption loads the highest onto the second most important
+principle component for describing variation in the data.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{library}\NormalTok{(}\StringTok{"rpart"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## Warning: package 'rpart' was built under R version 4.2.3
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{library}\NormalTok{(}\StringTok{"rpart.plot"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## Warning: package 'rpart.plot' was built under R version 4.2.3
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{smart\_tree }\OtherTok{\textless{}{-}} \FunctionTok{rpart}\NormalTok{(alliance}\SpecialCharTok{\textasciitilde{}}\NormalTok{Regime\_type}\SpecialCharTok{+}\NormalTok{Ownership.of.banks}\SpecialCharTok{+}\NormalTok{Government.consumption,}\AttributeTok{data =}\NormalTok{ train, }\AttributeTok{method =}\StringTok{"class"}\NormalTok{)}
+\FunctionTok{rpart.plot}\NormalTok{(smart\_tree)}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{Predicting_USA_alliance_files/figure-latex/unnamed-chunk-12-1.pdf}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{prp}\NormalTok{(smart\_tree)}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{Predicting_USA_alliance_files/figure-latex/unnamed-chunk-12-2.pdf}
+
+The above tree shows clear evidence of over-fitting. The tree is
+classifying countries with ownership of banks higher than 1.9 as allies,
+except for those with ownership of banks between 5.4 and 9.6. This is
+very unlikely to be anything other than noise, so the max depth of the
+tree will be lowered to 3.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{smart\_tree }\OtherTok{\textless{}{-}} \FunctionTok{rpart}\NormalTok{(alliance}\SpecialCharTok{\textasciitilde{}}\NormalTok{Regime\_type}\SpecialCharTok{+}\NormalTok{Ownership.of.banks}\SpecialCharTok{+}\NormalTok{Government.consumption,}\AttributeTok{data =}\NormalTok{ train, }\AttributeTok{method =}\StringTok{"class"}\NormalTok{,}\AttributeTok{control =} \FunctionTok{list}\NormalTok{(}\AttributeTok{maxdepth =} \DecValTok{3}\NormalTok{))}
+\FunctionTok{rpart.plot}\NormalTok{(smart\_tree)}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{Predicting_USA_alliance_files/figure-latex/unnamed-chunk-13-1.pdf}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{prp}\NormalTok{(smart\_tree)}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{Predicting_USA_alliance_files/figure-latex/unnamed-chunk-13-2.pdf}
+
+The above tree is easy to interpret. If a regime falls into single-party
+rule, multi-party authoritarian rule, personalist rule, Monarchy, other
+oligarchy, or is ``unknown.'' the US is not inclined to make an alliance
+with them unless government consumption is greater than 7.9. Since
+government consumption is reverse coded that corresponds to lower
+government consumption. These results indicate that the ``unknown''
+category isn't randomly distributed but is biased towards regimes that
+are not democracies. Most of the ``unknown'' countries were colonies of
+various Western European powers at the time. More domain expertise will
+be required to classify them.
+
+For countries considered Democracies, or ``military rule'', provided
+ownership of banks is higher than 1.9 then the US is predicted to make
+an alliance with them.
+
+Next, models can be created that simply use the political variables or
+the economic variables for comparison sake.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{poli\_tree }\OtherTok{\textless{}{-}} \FunctionTok{rpart}\NormalTok{(alliance}\SpecialCharTok{\textasciitilde{}}\NormalTok{Regime\_type,}\AttributeTok{data =}\NormalTok{ train, }\AttributeTok{method =}\StringTok{"class"}\NormalTok{)}
+\FunctionTok{rpart.plot}\NormalTok{(poli\_tree)}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{Predicting_USA_alliance_files/figure-latex/unnamed-chunk-14-1.pdf}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{prp}\NormalTok{(poli\_tree)}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{Predicting_USA_alliance_files/figure-latex/unnamed-chunk-14-2.pdf}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{econ\_tree }\OtherTok{\textless{}{-}} \FunctionTok{rpart}\NormalTok{(alliance}\SpecialCharTok{\textasciitilde{}}\NormalTok{Ownership.of.banks}\SpecialCharTok{+}\NormalTok{Government.consumption,}\AttributeTok{data =}\NormalTok{ train, }\AttributeTok{method =}\StringTok{"class"}\NormalTok{,}\AttributeTok{control =} \FunctionTok{list}\NormalTok{(}\AttributeTok{maxdepth =} \DecValTok{3}\NormalTok{))}
+\FunctionTok{rpart.plot}\NormalTok{(econ\_tree)}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{Predicting_USA_alliance_files/figure-latex/unnamed-chunk-15-1.pdf}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{prp}\NormalTok{(econ\_tree)}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{Predicting_USA_alliance_files/figure-latex/unnamed-chunk-15-2.pdf}
+With the tree depth of 3 the results are consistent with over-fitting so
+it should be reduced to 2
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{econ\_tree }\OtherTok{\textless{}{-}} \FunctionTok{rpart}\NormalTok{(alliance}\SpecialCharTok{\textasciitilde{}}\NormalTok{Ownership.of.banks}\SpecialCharTok{+}\NormalTok{Government.consumption,}\AttributeTok{data =}\NormalTok{ train, }\AttributeTok{method =}\StringTok{"class"}\NormalTok{,}\AttributeTok{control =} \FunctionTok{list}\NormalTok{(}\AttributeTok{maxdepth =} \DecValTok{2}\NormalTok{))}
+\FunctionTok{rpart.plot}\NormalTok{(econ\_tree)}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{Predicting_USA_alliance_files/figure-latex/unnamed-chunk-16-1.pdf}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{prp}\NormalTok{(econ\_tree)}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{Predicting_USA_alliance_files/figure-latex/unnamed-chunk-16-2.pdf}
+The performance of all three models can be tested on the training and
+test data. First we can see a summary of the smart\_tree
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{summary}\NormalTok{(smart\_tree)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## Call:
+## rpart(formula = alliance ~ Regime_type + Ownership.of.banks + 
+##     Government.consumption, data = train, method = "class", control = list(maxdepth = 3))
+##   n= 155 
+## 
+##           CP nsplit rel error    xerror      xstd
+## 1 0.19230769      0 1.0000000 1.0000000 0.1385259
+## 2 0.02564103      2 0.6153846 0.7435897 0.1244955
+## 3 0.01000000      3 0.5897436 0.8461538 0.1306792
+## 
+## Variable importance
+##            Regime_type     Ownership.of.banks Government.consumption 
+##                     46                     35                     18 
+## 
+## Node number 1: 155 observations,    complexity param=0.1923077
+##   predicted class=0  expected loss=0.2516129  P(node) =1
+##     class counts:   116    39
+##    probabilities: 0.748 0.252 
+##   left son=2 (95 obs) right son=3 (60 obs)
+##   Primary splits:
+##       Regime_type            splits as  RLLLRLLL,     improve=15.539110, (0 missing)
+##       Ownership.of.banks     < 1.907662 to the left,  improve=11.484860, (0 missing)
+##       Government.consumption < 7.435    to the left,  improve= 9.248003, (0 missing)
+##   Surrogate splits:
+##       Ownership.of.banks     < 4.218433 to the left,  agree=0.748, adj=0.35, (0 split)
+##       Government.consumption < 7.386863 to the left,  agree=0.652, adj=0.10, (0 split)
+## 
+## Node number 2: 95 observations,    complexity param=0.02564103
+##   predicted class=0  expected loss=0.07368421  P(node) =0.6129032
+##     class counts:    88     7
+##    probabilities: 0.926 0.074 
+##   left son=4 (86 obs) right son=5 (9 obs)
+##   Primary splits:
+##       Government.consumption < 7.91     to the left,  improve=4.617000, (0 missing)
+##       Regime_type            splits as  -LRR-LLL,     improve=1.253445, (0 missing)
+##       Ownership.of.banks     < 2.264192 to the left,  improve=1.058897, (0 missing)
+## 
+## Node number 3: 60 observations,    complexity param=0.1923077
+##   predicted class=1  expected loss=0.4666667  P(node) =0.3870968
+##     class counts:    28    32
+##    probabilities: 0.467 0.533 
+##   left son=6 (15 obs) right son=7 (45 obs)
+##   Primary splits:
+##       Ownership.of.banks     < 1.851967 to the left,  improve=6.400000, (0 missing)
+##       Government.consumption < 7.435    to the left,  improve=2.816667, (0 missing)
+##       Regime_type            splits as  R---L---,     improve=2.072024, (0 missing)
+## 
+## Node number 4: 86 observations
+##   predicted class=0  expected loss=0.02325581  P(node) =0.5548387
+##     class counts:    84     2
+##    probabilities: 0.977 0.023 
+## 
+## Node number 5: 9 observations
+##   predicted class=1  expected loss=0.4444444  P(node) =0.05806452
+##     class counts:     4     5
+##    probabilities: 0.444 0.556 
+## 
+## Node number 6: 15 observations
+##   predicted class=0  expected loss=0.1333333  P(node) =0.09677419
+##     class counts:    13     2
+##    probabilities: 0.867 0.133 
+## 
+## Node number 7: 45 observations
+##   predicted class=1  expected loss=0.3333333  P(node) =0.2903226
+##     class counts:    15    30
+##    probabilities: 0.333 0.667
+\end{verbatim}
+
+A good overview of performance on the training data can be obtained
+using the Caret library
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{library}\NormalTok{(}\StringTok{\textquotesingle{}caret\textquotesingle{}}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## Warning: package 'caret' was built under R version 4.2.3
+\end{verbatim}
+
+\begin{verbatim}
+## Loading required package: ggplot2
+\end{verbatim}
+
+\begin{verbatim}
+## Warning: package 'ggplot2' was built under R version 4.2.3
+\end{verbatim}
+
+\begin{verbatim}
+## Loading required package: lattice
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{smart\_tree\_predictions }\OtherTok{=} \FunctionTok{predict}\NormalTok{(smart\_tree, }\AttributeTok{data =}\NormalTok{ train, }\AttributeTok{type =} \StringTok{"class"}\NormalTok{)}
+\FunctionTok{confusionMatrix}\NormalTok{(}\FunctionTok{table}\NormalTok{(train}\SpecialCharTok{$}\NormalTok{alliance, smart\_tree\_predictions))}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## Confusion Matrix and Statistics
+## 
+##    smart_tree_predictions
+##      0  1
+##   0 97 19
+##   1  4 35
+##                                           
+##                Accuracy : 0.8516          
+##                  95% CI : (0.7857, 0.9036)
+##     No Information Rate : 0.6516          
+##     P-Value [Acc > NIR] : 1.988e-08       
+##                                           
+##                   Kappa : 0.6506          
+##                                           
+##  Mcnemar's Test P-Value : 0.003509        
+##                                           
+##             Sensitivity : 0.9604          
+##             Specificity : 0.6481          
+##          Pos Pred Value : 0.8362          
+##          Neg Pred Value : 0.8974          
+##              Prevalence : 0.6516          
+##          Detection Rate : 0.6258          
+##    Detection Prevalence : 0.7484          
+##       Balanced Accuracy : 0.8043          
+##                                           
+##        'Positive' Class : 0               
+## 
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\#table(train$alliance, smart\_tree\_predictions)}
+
+\NormalTok{econ\_tree\_predictions }\OtherTok{=} \FunctionTok{predict}\NormalTok{(econ\_tree, }\AttributeTok{data =}\NormalTok{ train,}\AttributeTok{type =} \StringTok{"class"}\NormalTok{)}
+\FunctionTok{confusionMatrix}\NormalTok{(}\FunctionTok{table}\NormalTok{(train}\SpecialCharTok{$}\NormalTok{alliance, econ\_tree\_predictions))}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## Confusion Matrix and Statistics
+## 
+##    econ_tree_predictions
+##       0   1
+##   0 110   6
+##   1  24  15
+##                                           
+##                Accuracy : 0.8065          
+##                  95% CI : (0.7354, 0.8654)
+##     No Information Rate : 0.8645          
+##     P-Value [Acc > NIR] : 0.983695        
+##                                           
+##                   Kappa : 0.3931          
+##                                           
+##  Mcnemar's Test P-Value : 0.001911        
+##                                           
+##             Sensitivity : 0.8209          
+##             Specificity : 0.7143          
+##          Pos Pred Value : 0.9483          
+##          Neg Pred Value : 0.3846          
+##              Prevalence : 0.8645          
+##          Detection Rate : 0.7097          
+##    Detection Prevalence : 0.7484          
+##       Balanced Accuracy : 0.7676          
+##                                           
+##        'Positive' Class : 0               
+## 
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\#table(train$alliance, econ\_tree\_predictions)}
+
+\NormalTok{poli\_tree\_predictions }\OtherTok{=} \FunctionTok{predict}\NormalTok{(poli\_tree, }\AttributeTok{data =}\NormalTok{ train, }\AttributeTok{type =} \StringTok{"class"}\NormalTok{)}
+\FunctionTok{confusionMatrix}\NormalTok{(}\FunctionTok{table}\NormalTok{(train}\SpecialCharTok{$}\NormalTok{alliance, poli\_tree\_predictions))}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## Confusion Matrix and Statistics
+## 
+##    poli_tree_predictions
+##       0   1
+##   0 105  11
+##   1  18  21
+##                                          
+##                Accuracy : 0.8129         
+##                  95% CI : (0.7425, 0.871)
+##     No Information Rate : 0.7935         
+##     P-Value [Acc > NIR] : 0.3152         
+##                                          
+##                   Kappa : 0.4717         
+##                                          
+##  Mcnemar's Test P-Value : 0.2652         
+##                                          
+##             Sensitivity : 0.8537         
+##             Specificity : 0.6562         
+##          Pos Pred Value : 0.9052         
+##          Neg Pred Value : 0.5385         
+##              Prevalence : 0.7935         
+##          Detection Rate : 0.6774         
+##    Detection Prevalence : 0.7484         
+##       Balanced Accuracy : 0.7550         
+##                                          
+##        'Positive' Class : 0              
+## 
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\#table(train$alliance, poli\_tree\_predictions)}
+\end{Highlighting}
+\end{Shaded}
+
+It can be seen that the ``smart tree'' as one might expect, performs the
+best. Interestingly, the political tree performs better than the
+economic tree. This is no doubt related to the fact that ``Regime type''
+has by far the highest ``Variable importance'' of any predictor in the
+smart-tree. I will predict that the smart-tree will still show
+exceptional performance and the best performance on the test-data.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{smart\_tree\_predictions }\OtherTok{=} \FunctionTok{predict}\NormalTok{(smart\_tree, }\AttributeTok{newdata =}\NormalTok{ test, }\AttributeTok{type =} \StringTok{"class"}\NormalTok{)}
+
+\FunctionTok{confusionMatrix}\NormalTok{(}\FunctionTok{table}\NormalTok{(test}\SpecialCharTok{$}\NormalTok{alliance, smart\_tree\_predictions))}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## Confusion Matrix and Statistics
+## 
+##    smart_tree_predictions
+##      0  1
+##   0 15  5
+##   1  2  5
+##                                           
+##                Accuracy : 0.7407          
+##                  95% CI : (0.5372, 0.8889)
+##     No Information Rate : 0.6296          
+##     P-Value [Acc > NIR] : 0.1596          
+##                                           
+##                   Kappa : 0.4075          
+##                                           
+##  Mcnemar's Test P-Value : 0.4497          
+##                                           
+##             Sensitivity : 0.8824          
+##             Specificity : 0.5000          
+##          Pos Pred Value : 0.7500          
+##          Neg Pred Value : 0.7143          
+##              Prevalence : 0.6296          
+##          Detection Rate : 0.5556          
+##    Detection Prevalence : 0.7407          
+##       Balanced Accuracy : 0.6912          
+##                                           
+##        'Positive' Class : 0               
+## 
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{econ\_tree\_predictions }\OtherTok{=} \FunctionTok{predict}\NormalTok{(econ\_tree, }\AttributeTok{newdata =}\NormalTok{ test,}\AttributeTok{type =} \StringTok{"class"}\NormalTok{)}
+
+\FunctionTok{confusionMatrix}\NormalTok{(}\FunctionTok{table}\NormalTok{(test}\SpecialCharTok{$}\NormalTok{alliance, econ\_tree\_predictions))}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## Confusion Matrix and Statistics
+## 
+##    econ_tree_predictions
+##      0  1
+##   0 16  4
+##   1  5  2
+##                                           
+##                Accuracy : 0.6667          
+##                  95% CI : (0.4604, 0.8348)
+##     No Information Rate : 0.7778          
+##     P-Value [Acc > NIR] : 0.9417          
+##                                           
+##                   Kappa : 0.0899          
+##                                           
+##  Mcnemar's Test P-Value : 1.0000          
+##                                           
+##             Sensitivity : 0.7619          
+##             Specificity : 0.3333          
+##          Pos Pred Value : 0.8000          
+##          Neg Pred Value : 0.2857          
+##              Prevalence : 0.7778          
+##          Detection Rate : 0.5926          
+##    Detection Prevalence : 0.7407          
+##       Balanced Accuracy : 0.5476          
+##                                           
+##        'Positive' Class : 0               
+## 
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{poli\_tree\_predictions }\OtherTok{=} \FunctionTok{predict}\NormalTok{(poli\_tree, }\AttributeTok{newdata =}\NormalTok{ test, }\AttributeTok{type =} \StringTok{"class"}\NormalTok{)}
+
+\FunctionTok{confusionMatrix}\NormalTok{(}\FunctionTok{table}\NormalTok{(test}\SpecialCharTok{$}\NormalTok{alliance, poli\_tree\_predictions))}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## Confusion Matrix and Statistics
+## 
+##    poli_tree_predictions
+##      0  1
+##   0 17  3
+##   1  3  4
+##                                           
+##                Accuracy : 0.7778          
+##                  95% CI : (0.5774, 0.9138)
+##     No Information Rate : 0.7407          
+##     P-Value [Acc > NIR] : 0.4269          
+##                                           
+##                   Kappa : 0.4214          
+##                                           
+##  Mcnemar's Test P-Value : 1.0000          
+##                                           
+##             Sensitivity : 0.8500          
+##             Specificity : 0.5714          
+##          Pos Pred Value : 0.8500          
+##          Neg Pred Value : 0.5714          
+##              Prevalence : 0.7407          
+##          Detection Rate : 0.6296          
+##    Detection Prevalence : 0.7407          
+##       Balanced Accuracy : 0.7107          
+##                                           
+##        'Positive' Class : 0               
+## 
+\end{verbatim}
+
+The ``econ-tree'' fails on the test data, indicating that the US does
+not seem to be choosing its allies from a purely economic standpoint,
+and the political considerations factor in heavily. Indeed the
+``poli-tree'' performs slightly better on the test-data than the smart
+tree (based on Kappa). However their performance is comparable, and the
+smart tree has a desirable feature: given that the US actually makes an
+alliance with a country, the smart tree is better at successfully
+predicting this. The smart tree has a lower rate of type 2 errors. And
+although the rate of type 1 errors is higher, it is not terribly high.
+This actually holds true on the training data and the test data which
+suggests it is not noise. America up until 1970 selected its allies
+based on a mixture of political and economic criteria. It is of course a
+stochastic process, but there are also measurable deterministic criteria
+used to choose allies.
+
+Another line of enquiry is comparing the Economic Freedom Summary Index
+from the Frasier Institute with the liberal democracy index from Vdem.
+These are variables where one would reasonably only expect a monotonic
+relationship between them and the US decision to make an alliance with a
+country. Binary logistic regression can be used to evaluate the
+correlations and see which is a stronger predictor of whether or not the
+US forges an alliance with a country.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{full\_model}\OtherTok{\textless{}{-}}\FunctionTok{glm}\NormalTok{(alliance}\SpecialCharTok{\textasciitilde{}}\NormalTok{libdem\_vdem\_owid}\SpecialCharTok{+}\NormalTok{Economic.Freedom.Summary.Index,}
+                \AttributeTok{family=}\NormalTok{binomial,}\AttributeTok{data=}\NormalTok{train) }
+
+\NormalTok{lib\_model}\OtherTok{\textless{}{-}}\FunctionTok{glm}\NormalTok{(alliance}\SpecialCharTok{\textasciitilde{}}\NormalTok{libdem\_vdem\_owid,}
+                \AttributeTok{family=}\NormalTok{binomial,}\AttributeTok{data=}\NormalTok{train) }
+
+\NormalTok{cap\_model}\OtherTok{\textless{}{-}}\FunctionTok{glm}\NormalTok{(alliance}\SpecialCharTok{\textasciitilde{}}\NormalTok{Economic.Freedom.Summary.Index,}
+                \AttributeTok{family=}\NormalTok{binomial,}\AttributeTok{data=}\NormalTok{train) }
+\end{Highlighting}
+\end{Shaded}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{summary}\NormalTok{(full\_model)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## 
+## Call:
+## glm(formula = alliance ~ libdem_vdem_owid + Economic.Freedom.Summary.Index, 
+##     family = binomial, data = train)
+## 
+## Deviance Residuals: 
+##     Min       1Q   Median       3Q      Max  
+## -1.8450  -0.6472  -0.4646   0.1574   2.3056  
+## 
+## Coefficients:
+##                                Estimate Std. Error z value Pr(>|z|)    
+## (Intercept)                     -7.1294     1.6548  -4.308 1.64e-05 ***
+## libdem_vdem_owid                 0.6773     1.1670   0.580  0.56167    
+## Economic.Freedom.Summary.Index   1.0498     0.3196   3.285  0.00102 ** 
+## ---
+## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+## 
+## (Dispersion parameter for binomial family taken to be 1)
+## 
+##     Null deviance: 174.87  on 154  degrees of freedom
+## Residual deviance: 139.37  on 152  degrees of freedom
+## AIC: 145.37
+## 
+## Number of Fisher Scoring iterations: 4
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{library}\NormalTok{(lmtest)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## Warning: package 'lmtest' was built under R version 4.2.3
+\end{verbatim}
+
+\begin{verbatim}
+## Loading required package: zoo
+\end{verbatim}
+
+\begin{verbatim}
+## Warning: package 'zoo' was built under R version 4.2.3
+\end{verbatim}
+
+\begin{verbatim}
+## 
+## Attaching package: 'zoo'
+\end{verbatim}
+
+\begin{verbatim}
+## The following objects are masked from 'package:base':
+## 
+##     as.Date, as.Date.numeric
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\DocumentationTok{\#\#\# Comparing the crude model (logit1) to the adjusted model (logit2)}
+\FunctionTok{lrtest}\NormalTok{(lib\_model, cap\_model)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## Likelihood ratio test
+## 
+## Model 1: alliance ~ libdem_vdem_owid
+## Model 2: alliance ~ Economic.Freedom.Summary.Index
+##   #Df  LogLik Df  Chisq Pr(>Chisq)    
+## 1   2 -75.620                         
+## 2   2 -69.852  0 11.537  < 2.2e-16 ***
+## ---
+## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+\end{verbatim}
+
+It can be seen that the Economic Freedom Summary Index from the Frasier
+Institute is a stronger predictor of whether or not the US aligns with a
+given country, compared to the liberal democracy index. With both
+variables in the model the liberal democracy index isn't statistically
+significant.
+
+Both models can be used for prediction as well.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{probabilities }\OtherTok{\textless{}{-}}\NormalTok{ cap\_model }\SpecialCharTok{\%\textgreater{}\%} \FunctionTok{predict}\NormalTok{(train, }\AttributeTok{type =} \StringTok{"response"}\NormalTok{)}
+\NormalTok{capitalist\_model }\OtherTok{\textless{}{-}} \FunctionTok{ifelse}\NormalTok{(probabilities }\SpecialCharTok{\textgreater{}} \FloatTok{0.5}\NormalTok{, }\DecValTok{1}\NormalTok{, }\DecValTok{0}\NormalTok{)}
+\FunctionTok{table}\NormalTok{(train}\SpecialCharTok{$}\NormalTok{alliance, capitalist\_model)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##    capitalist_model
+##       0   1
+##   0 108   8
+##   1  25  14
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{probabilities }\OtherTok{\textless{}{-}}\NormalTok{ lib\_model }\SpecialCharTok{\%\textgreater{}\%} \FunctionTok{predict}\NormalTok{(train, }\AttributeTok{type =} \StringTok{"response"}\NormalTok{)}
+\NormalTok{liberal\_model }\OtherTok{\textless{}{-}} \FunctionTok{ifelse}\NormalTok{(probabilities }\SpecialCharTok{\textgreater{}} \FloatTok{0.5}\NormalTok{, }\DecValTok{1}\NormalTok{, }\DecValTok{0}\NormalTok{)}
+\FunctionTok{table}\NormalTok{(train}\SpecialCharTok{$}\NormalTok{alliance, liberal\_model)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##    liberal_model
+##       0   1
+##   0 110   6
+##   1  25  14
+\end{verbatim}
+
+Intriguingly the liberal model has slightly better performance on the
+training data. It would be worthwhile to look at the summary for both
+models.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{summary}\NormalTok{(lib\_model)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## 
+## Call:
+## glm(formula = alliance ~ libdem_vdem_owid, family = binomial, 
+##     data = train)
+## 
+## Deviance Residuals: 
+##      Min        1Q    Median        3Q       Max  
+## -1.56552  -0.63843  -0.56561   0.08812   1.99850  
+## 
+## Coefficients:
+##                  Estimate Std. Error z value Pr(>|z|)    
+## (Intercept)       -1.9541     0.2862  -6.828 8.63e-12 ***
+## libdem_vdem_owid   3.6778     0.8008   4.593 4.38e-06 ***
+## ---
+## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+## 
+## (Dispersion parameter for binomial family taken to be 1)
+## 
+##     Null deviance: 174.87  on 154  degrees of freedom
+## Residual deviance: 151.24  on 153  degrees of freedom
+## AIC: 155.24
+## 
+## Number of Fisher Scoring iterations: 3
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{summary}\NormalTok{(cap\_model)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## 
+## Call:
+## glm(formula = alliance ~ Economic.Freedom.Summary.Index, family = binomial, 
+##     data = train)
+## 
+## Deviance Residuals: 
+##     Min       1Q   Median       3Q      Max  
+## -1.8508  -0.6527  -0.4618   0.1693   2.4280  
+## 
+## Coefficients:
+##                                Estimate Std. Error z value Pr(>|z|)    
+## (Intercept)                     -7.7147     1.3348  -5.780 7.49e-09 ***
+## Economic.Freedom.Summary.Index   1.1816     0.2288   5.164 2.42e-07 ***
+## ---
+## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+## 
+## (Dispersion parameter for binomial family taken to be 1)
+## 
+##     Null deviance: 174.87  on 154  degrees of freedom
+## Residual deviance: 139.70  on 153  degrees of freedom
+## AIC: 143.7
+## 
+## Number of Fisher Scoring iterations: 4
+\end{verbatim}
+
+Interestingly both models are significant but the capitalist model has a
+lower AIC hence the multivariate model does not consider liberal
+democracy to add any predictive capability above and beyond economic
+freedom.
+
+it can be seen that the correlation between these variables is strong
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{cor}\NormalTok{(train}\SpecialCharTok{$}\NormalTok{libdem\_vdem\_owid,train}\SpecialCharTok{$}\NormalTok{Economic.Freedom.Summary.Index)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] 0.7417757
+\end{verbatim}
+
+Evaluating both models on the test data now
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{probabilities }\OtherTok{\textless{}{-}}\NormalTok{ cap\_model }\SpecialCharTok{\%\textgreater{}\%} \FunctionTok{predict}\NormalTok{(test, }\AttributeTok{type =} \StringTok{"response"}\NormalTok{)}
+\NormalTok{capitalist\_model }\OtherTok{\textless{}{-}} \FunctionTok{ifelse}\NormalTok{(probabilities }\SpecialCharTok{\textgreater{}} \FloatTok{0.5}\NormalTok{, }\DecValTok{1}\NormalTok{, }\DecValTok{0}\NormalTok{)}
+\FunctionTok{table}\NormalTok{(test}\SpecialCharTok{$}\NormalTok{alliance, capitalist\_model)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##    capitalist_model
+##      0  1
+##   0 16  4
+##   1  5  2
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{probabilities }\OtherTok{\textless{}{-}}\NormalTok{ lib\_model }\SpecialCharTok{\%\textgreater{}\%} \FunctionTok{predict}\NormalTok{(test, }\AttributeTok{type =} \StringTok{"response"}\NormalTok{)}
+\NormalTok{liberal\_model }\OtherTok{\textless{}{-}} \FunctionTok{ifelse}\NormalTok{(probabilities }\SpecialCharTok{\textgreater{}} \FloatTok{0.5}\NormalTok{, }\DecValTok{1}\NormalTok{, }\DecValTok{0}\NormalTok{)}
+\FunctionTok{table}\NormalTok{(test}\SpecialCharTok{$}\NormalTok{alliance, liberal\_model)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##    liberal_model
+##      0  1
+##   0 18  2
+##   1  4  3
+\end{verbatim}
+
+Curiously the liberal model has better performance on the test data as
+well. The capitalist model obviously performs very poorly on the test
+data, and the liberal model shows fair performance. However the overall
+results that came back from the binary logistic regression are
+indicative of noise. It is unclear why the liberal model would have a
+higher AIC.
+
+All of the above analyses converge on the idea that qualitative
+political considerations are more important than the capitalist
+dimension for predicting what regimes the US will make an alliance with.
+However, the capitalist dimension is obviously important as demonstrated
+by the smart tree. Every single model has higher type II errors than the
+smart tree for detecting regimes that the US has indeed forged an
+alliance with. This holds true on the training and test data.
+
+The political tree basically just predicts that it's a US ally if and
+only if it's classified as a democracy. This is obviously not the case.
+The smart-tree realizes that for non-democracies, the US policy is to
+make an alliance with them if they are sufficiently capitalist in terms
+of their economic landscape. Interestingly the smart tree is less
+conservative from a data science standpoint and mirrors the real-life
+take of less conservative thinkers. The political tree is more
+conservative from a data science standpoint (fewer type 1 errors) and it
+mirrors the take of western conservative thinkers who have long assumed
+that the US is mostly concerned with promoting liberal democracy.
+
+It will be useful to see some descriptive visuals for this data.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{library}\NormalTok{(ggplot2)}
+\NormalTok{g }\OtherTok{\textless{}{-}} \FunctionTok{ggplot}\NormalTok{(main\_df, }\FunctionTok{aes}\NormalTok{(Regime\_type, }\AttributeTok{fill=}\NormalTok{Regime\_type))}\SpecialCharTok{+} \FunctionTok{geom\_bar}\NormalTok{() }
+\NormalTok{g}\SpecialCharTok{+} \FunctionTok{theme}\NormalTok{(}\AttributeTok{axis.text.x =} \FunctionTok{element\_text}\NormalTok{(}\AttributeTok{angle =} \DecValTok{45}\NormalTok{, }\AttributeTok{hjust =} \DecValTok{1}\NormalTok{))}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{Predicting_USA_alliance_files/figure-latex/unnamed-chunk-27-1.pdf}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{library}\NormalTok{(ggplot2)}
+\NormalTok{g }\OtherTok{\textless{}{-}} \FunctionTok{ggplot}\NormalTok{(main\_df }\SpecialCharTok{\%\textgreater{}\%} \FunctionTok{filter}\NormalTok{(alliance }\SpecialCharTok{==} \DecValTok{1}\NormalTok{), }\FunctionTok{aes}\NormalTok{(Regime\_type, }\AttributeTok{fill=}\NormalTok{Regime\_type))}\SpecialCharTok{+}\FunctionTok{geom\_bar}\NormalTok{() }
+\NormalTok{g}\SpecialCharTok{+} \FunctionTok{theme}\NormalTok{(}\AttributeTok{axis.text.x =} \FunctionTok{element\_text}\NormalTok{(}\AttributeTok{angle =} \DecValTok{45}\NormalTok{, }\AttributeTok{hjust =} \DecValTok{1}\NormalTok{))}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{Predicting_USA_alliance_files/figure-latex/unnamed-chunk-28-1.pdf}
+It can be seen that the distribution of regime types for US allies is
+quite different from the distribution for all countries at that time.
+The US is heavily biased towards aligning with democracies, and
+curiously, the US isn't so averse to regimes under Military rule.
+
+Similarly we can see what proportion of Democracies were US allies, and
+what proportion of countries under Military rule were US allies.
+
+First looking at Democracies
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{g }\OtherTok{\textless{}{-}} \FunctionTok{ggplot}\NormalTok{(main\_df }\SpecialCharTok{\%\textgreater{}\%} \FunctionTok{filter}\NormalTok{(Regime\_type }\SpecialCharTok{==} \StringTok{"Democracy"}\NormalTok{), }\FunctionTok{aes}\NormalTok{(alliance, }\AttributeTok{fill=}\NormalTok{alliance))}\SpecialCharTok{+}\FunctionTok{geom\_bar}\NormalTok{() }
+\NormalTok{g}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{Predicting_USA_alliance_files/figure-latex/unnamed-chunk-29-1.pdf}
+
+Next looking at regimes under Military Rule
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{g }\OtherTok{\textless{}{-}} \FunctionTok{ggplot}\NormalTok{(main\_df }\SpecialCharTok{\%\textgreater{}\%} \FunctionTok{filter}\NormalTok{(Regime\_type }\SpecialCharTok{==} \StringTok{"Military rule"}\NormalTok{), }\FunctionTok{aes}\NormalTok{(alliance, }\AttributeTok{fill=}\NormalTok{alliance))}\SpecialCharTok{+}\FunctionTok{geom\_bar}\NormalTok{() }
+\NormalTok{g}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{Predicting_USA_alliance_files/figure-latex/unnamed-chunk-30-1.pdf}
+
+It can be seen that the majority of democracies were US allies. Although
+the majority of regimes under Military rule were not US allies, a
+sizable minority of them were.
+
+There are of course other variables to consider that don't usually enter
+into the discussion. Such as cultural background. The US had a clear
+preference at this time for making alliances with countries in Latin
+America, the Caribean, and Western Europe, indicating that a shared
+cultural background (e.g., Western Christianity) is likely very
+important. Nonetheless the US notably forged alliances with countries
+from drastically different cultural backgrounds (some of which continue
+to this day) and there are many western/democratic nations that didn't
+or have not forged an alliance with the US. The US primarily leans
+towards aligning with democracies. However, provided those democracies
+are not capitalist enough the US will not align with them, and provided
+authoritarian regimes are sufficiently capitalist, the US will align
+with them. That is the logic of the smart tree, and although it is just
+a model of a complex stochastic process, it seems to have validity.
+
+The next step will be to test this model on data from after 1980 and see
+if it's still a fit. In that case it may be worthwhile to normalize the
+variables so that the predictors are seen through a ``relative'' lens.
+
+\end{document}
