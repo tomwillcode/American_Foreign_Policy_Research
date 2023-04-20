@@ -132,6 +132,15 @@
 ##     intersect, setdiff, setequal, union
 \end{verbatim}
 
+The following analysis will see what aspects of a countries
+politics/economy in 1970 predict the US creating a meaningful alliance
+with that country after WWII, and lasting until 1970. The only alliances
+that will be considered here are as follows: defense OR nonaggression OR
+entente (the binary alliance variable takes on a 1 in the event of any
+one of these, or a 0 otherwise). The neutrality treaties seem to be much
+weaker agreements that don't last long. The data sources can be seen in
+the repository.
+
 \begin{Shaded}
 \begin{Highlighting}[]
 \NormalTok{main\_df }\OtherTok{\textless{}{-}} \FunctionTok{read.csv}\NormalTok{(}\StringTok{"Frasier\_Vdem\_regime\&alliance.csv"}\NormalTok{)}
@@ -384,6 +393,7 @@ the economic variables for comparison sake.
 \end{Shaded}
 
 \includegraphics{Predicting_USA_alliance_files/figure-latex/unnamed-chunk-15-2.pdf}
+
 With the tree depth of 3 the results are consistent with over-fitting so
 it should be reduced to 2
 
@@ -403,6 +413,7 @@ it should be reduced to 2
 \end{Shaded}
 
 \includegraphics{Predicting_USA_alliance_files/figure-latex/unnamed-chunk-16-2.pdf}
+
 The performance of all three models can be tested on the training and
 test data. First we can see a summary of the smart\_tree
 
@@ -1067,6 +1078,7 @@ It will be useful to see some descriptive visuals for this data.
 \end{Shaded}
 
 \includegraphics{Predicting_USA_alliance_files/figure-latex/unnamed-chunk-28-1.pdf}
+
 It can be seen that the distribution of regime types for US allies is
 quite different from the distribution for all countries at that time.
 The US is heavily biased towards aligning with democracies, and

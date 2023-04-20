@@ -1,9 +1,9 @@
 ---
 title: "R Notebook"
 output:
+  pdf_document: default
   html_document:
     df_print: paged
-  pdf_document: default
 ---
 
 
@@ -433,6 +433,9 @@ There are of course other variables to consider that don't usually enter into th
 The US primarily leans towards aligning with democracies. However, provided those democracies are not capitalist enough the US will not align with them, and provided authoritarian regimes are sufficiently capitalist, the US will align with them. That is the logic of the smart tree, and although it is just a model of a complex stochastic process, it seems to have validity.
 
 The next step will be to test this model on data from after 1980 and see if it's still a fit. In that case it may be worthwhile to normalize the variables so that the predictors are seen through a "relative" lens.
+
+
+
 
 
 
