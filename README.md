@@ -27,6 +27,10 @@ However, private ownership of banks sharply discriminated countries the US had a
 
 In the end this data-driven model indicates that the qualitative political aspect of a country is the most important variable in deciding whether or not the US will make an alliance with that country. The US showed a clear preference towards democracies, and although they didn't make an alliance with the majority of countries under military rule, they made an alliance with a sizable minority of them. The US made very few alliances with other regime types, but the extent to which a country had a more privatized political economy seemed to be a deciding factor in whether or not the US would align with them.  
 
+**Further Research**
+The CSV's were merged and all data-wrangling took place in the Jupyter Notebooks included above. Feel free to review/copy/clone. I am working on getting this aspect of the repo more organized. A PCA was done in the R-notebook "PCA_on_predictors_of_US_alignment.Rmd" to get an idea of what components explain most of the variability in the dataset, and to see which variables load the highest onto those components. The predictive model was built in the R-notebook "Predicting_USA_alliance.Rmd".
+
+
 **Data Sources**
 
 The following data-sets are used for this project:
