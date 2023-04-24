@@ -27,8 +27,19 @@ However, private ownership of banks sharply discriminated countries the US had a
 
 In the end this data-driven model indicates that the qualitative political aspect of a country is the most important variable in deciding whether or not the US will make an alliance with that country. The US showed a clear preference towards democracies, and although they didn't make an alliance with the majority of countries under military rule, they made an alliance with a sizable minority of them. The US made very few alliances with other regime types, but the extent to which a country had a more privatized political economy seemed to be a deciding factor in whether or not the US would align with them.  
 
-**Further Research**
-The CSV's were merged and all data-wrangling took place in the Jupyter Notebooks included above. Feel free to review/copy/clone. I am working on getting this aspect of the repo more organized. A PCA was done in the R-notebook "PCA_on_predictors_of_US_alignment.Rmd" to get an idea of what components explain most of the variability in the dataset, and to see which variables load the highest onto those components. The predictive model was built in the R-notebook "Predicting_USA_alliance.Rmd".
+**Methodology**
+The CSV's were obtained from the sources as described in the next section. The CSV's were all merged and all data-wrangling took place in the Jupyter Notebooks included in the root of this repository. To review that data-wrangling you can view the Jupyter Notbooks:
+
+-Extracting_data_on_regime_type.ipynb
+-Extracting politics data.ipynb
+-Merge_data_from_Frasier_&_V-Dem.ipynb
+-Integrating Alliance Data.ipynb
+-Merging_with_Regime_type_data.ipynb
+
+The end product of that data-wrangling is a CSV that contains data on every country in the world in 1970 including political variables from varieties of democracy, economic and political variables from the Frasier Institute, a variable tracking whether or not they were in an alliance with the U.S. and a variable classifying them as one kind or another regime (political regimes of the world dataset). Feel free to review the notebooks, and clone the repository and change something.
+
+
+In the Analysis folder you will find the data-analysis carried out in R-studio. A PCA was done in the R-notebook "PCA_on_predictors_of_US_alignment.Rmd" to get an idea of what components explain most of the variability in the dataset, and to see which variables load the highest onto those components. The predictive model was built in the R-notebook "Predicting_USA_alliance.Rmd". Feel free to review, clone, change.
 
 
 **Data Sources**
@@ -45,10 +56,10 @@ https://www.fraserinstitute.org/economic-freedom/dataset?geozone=world&page=data
 -Formal Alliances from Correlates of War
 https://correlatesofwar.org/data-sets/formal-alliances/
 
+-Political Regimes of the World Dataset, v.2.0, Anckar, Carsten; Fredriksson, Cecilia, 2020, "Political Regimes of the World Dataset, v.2.0", https://doi.org/10.7910/DVN/7SSSAH, Harvard Dataverse, V2, UNF:6:R6ZGXOA4YiGEhOHHK7fdMA== [fileUNF]
+https://dataverse.harvard.edu/dataset.xhtml?persistentId=doi:10.7910/DVN/7SSSAH
+
 **Merging Data**
 
 All data was merged in a way that is open-source/open access as can be seen in the Jupyter Notebooks in this repository. The dataset that has been created makes a note of whether or not America had become proper allies with a country by the end of 1970, and various predictors from Frasier Inst, and Varieties of Democracy measuring those countries characteristics in the year 1970 are included. It may be a limitation that the predictors aren't from earlier but the Frasier Inst data which is very high-resolution only goes back to 1970.
 
-**PCA Analysis**
-
-So far a PCA has been carried out in R-Studio to understand what the main principle components are amongst the variables that will be used as predictors, so that a few predictors can be used that are the most promising in terms of their ability to represent the data. A "two-factor" solution seems to fit the predictors best. One factor separates capitalist-liberal democracies from countries that are not, and the second factor is related to the overall size and power of government especially from an economic standpoint. 
