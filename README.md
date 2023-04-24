@@ -35,9 +35,13 @@ In the end this data-driven model indicates that the qualitative political aspec
 The CSV's were obtained from the sources as described in the next section. The CSV's were all merged and all data-wrangling took place in the Jupyter Notebooks included in the root of this repository. To review that data-wrangling you can view the Jupyter Notbooks:
 
 -Extracting_data_on_regime_type.ipynb
+
 -Extracting politics data.ipynb
+
 -Merge_data_from_Frasier_&_V-Dem.ipynb
+
 -Integrating Alliance Data.ipynb
+
 -Merging_with_Regime_type_data.ipynb
 
 The end product of that data-wrangling is a CSV that contains data on every country in the world in 1970 including political variables from varieties of democracy, economic and political variables from the Frasier Institute, a variable tracking whether or not they were in an alliance with the U.S. and a variable classifying them as one kind or another regime (political regimes of the world dataset). Feel free to review the notebooks, and clone the repository and change something.
