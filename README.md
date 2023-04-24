@@ -15,9 +15,13 @@ Indeed The tree performs fairly well on training and test data.
 
 It can be seen that there is a substantial discrepency between the regimes of the world in 1970:
 
+**Regimes of the world in 1970**
+
 ![regimes of the world](https://github.com/tomwillcode/American_Foreign_Policy_Research/blob/research/regimes_of_world_70.jpg?raw=true)
 
 And the regimes that the US made an alliance with:
+
+**Regimes of US allies in 1970**
 
 ![regimes the us made an alliance with](https://github.com/tomwillcode/American_Foreign_Policy_Research/blob/research/regime_us_allies_70.jpg?raw=true)
 
